@@ -1,13 +1,16 @@
+require './exceptions'
+require './board'
+
 class Game
+  attr_reader :board
+
   def initialize
-    @board = ["0", "1", "2", "3", "4", "5", "6", "7", "8"]
-    @com = "X" # the computer's marker
-    @hum = "O" # the user's marker
+    @board = Board.new
   end
 
   def start_game
     # start by printing the board
-    puts " #{@board[0]} | #{@board[1]} | #{@board[2]} \n===+===+===\n #{@board[3]} | #{@board[4]} | #{@board[5]} \n===+===+===\n #{@board[6]} | #{@board[7]} | #{@board[8]} \n"
+    puts board.draw
     puts "Enter [0-8]:"
     # loop through until the game was won or tied
     until game_is_over(@board) || tie(@board)
@@ -15,7 +18,7 @@ class Game
       if !game_is_over(@board) && !tie(@board)
         eval_board
       end
-      puts " #{@board[0]} | #{@board[1]} | #{@board[2]} \n===+===+===\n #{@board[3]} | #{@board[4]} | #{@board[5]} \n===+===+===\n #{@board[6]} | #{@board[7]} | #{@board[8]} \n"
+      puts board.draw
     end
     puts "Game over"
   end
@@ -23,10 +26,14 @@ class Game
   def get_human_spot
     spot = nil
     until spot
-      spot = gets.chomp.to_i
-      if @board[spot] != "X" && @board[spot] != "O"
-        @board[spot] = @hum
-      else
+      spot = gets.chomp
+      begin
+        board.player1_insert(spot)
+      rescue SpotAlreadyUsedError
+        puts "Spot #{spot} is already used, try another"
+        spot = nil
+      rescue SpotDoesNotExistsError
+        puts "Spot #{spot} does not exists, try another"
         spot = nil
       end
     end
@@ -35,13 +42,13 @@ class Game
   def eval_board
     spot = nil
     until spot
-      if @board[4] == "4"
+      if board.board[4] == "4"
         spot = 4
-        @board[spot] = @com
+        board.player2_insert(4)
       else
-        spot = get_best_move(@board, @com)
-        if @board[spot] != "X" && @board[spot] != "O"
-          @board[spot] = @com
+        spot = get_best_move(@board, Board::PLAYER2_MARK)
+        if board.board[spot] != "X" && board.board[spot] != "O"
+          board.player2_insert(spot)
         else
           spot = nil
         end
@@ -52,25 +59,25 @@ class Game
   def get_best_move(board, next_player, depth = 0, best_score = {})
     available_spaces = []
     best_move = nil
-    board.each do |s|
+    board.board.each do |s|
       if s != "X" && s != "O"
         available_spaces << s
       end
     end
     available_spaces.each do |as|
-      board[as.to_i] = @com
+      board.board[as.to_i] = Board::PLAYER2_MARK
       if game_is_over(board)
         best_move = as.to_i
-        board[as.to_i] = as
+        board.board[as.to_i] = as
         return best_move
       else
-        board[as.to_i] = @hum
+        board.board[as.to_i] = Board::PLAYER1_MARK
         if game_is_over(board)
           best_move = as.to_i
-          board[as.to_i] = as
+          board.board[as.to_i] = as
           return best_move
         else
-          board[as.to_i] = as
+          board.board[as.to_i] = as
         end
       end
     end
@@ -83,7 +90,7 @@ class Game
   end
 
   def game_is_over(b)
-
+    b = b.board
     [b[0], b[1], b[2]].uniq.length == 1 ||
     [b[3], b[4], b[5]].uniq.length == 1 ||
     [b[6], b[7], b[8]].uniq.length == 1 ||
@@ -95,9 +102,8 @@ class Game
   end
 
   def tie(b)
-    b.all? { |s| s == "X" || s == "O" }
+    b.board.all? { |s| s == "X" || s == "O" }
   end
-
 end
 
 game = Game.new

@@ -1,5 +1,3 @@
-require './exceptions'
-
 class Board
   PLAYER1_MARK = "O"
   PLAYER2_MARK = "X"
@@ -40,6 +38,6 @@ class Board
   end
 
   def valid_spot?(spot)
-    (0..8).include?(spot)
+    /^[0-8]{1}$/.match(spot.to_s)
   end
 end

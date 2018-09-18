@@ -1,5 +1,4 @@
-require './board'
-require './exceptions'
+require 'spec_helper'
 
 RSpec.describe Board do
   describe "#player1_insert" do

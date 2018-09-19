@@ -114,4 +114,126 @@ RSpec.describe Board do
       )
     end
   end
+
+  describe "#game_over?" do
+    let(:board) { Board.new }
+
+    context "when first line is filled with same mark" do
+      it "returns true" do
+        board.player1_insert(0)
+        board.player1_insert(1)
+        board.player1_insert(2)
+        expect(board.game_over?).to be_truthy
+      end
+    end
+
+    context "when second line is filled with same mark" do
+      it "returns true" do
+        board.player1_insert(3)
+        board.player1_insert(4)
+        board.player1_insert(5)
+        expect(board.game_over?).to be_truthy
+      end
+    end
+
+    context "when third line is filled with same mark" do
+      it "returns true" do
+        board.player1_insert(6)
+        board.player1_insert(7)
+        board.player1_insert(8)
+        expect(board.game_over?).to be_truthy
+      end
+    end
+
+    context "when first column is filled with same mark" do
+      it "returns true" do
+        board.player1_insert(0)
+        board.player1_insert(3)
+        board.player1_insert(6)
+        expect(board.game_over?).to be_truthy
+      end
+    end
+
+    context "when second column is filled with same mark" do
+      it "returns true" do
+        board.player1_insert(1)
+        board.player1_insert(4)
+        board.player1_insert(7)
+        expect(board.game_over?).to be_truthy
+      end
+    end
+
+    context "when third column is filled with same mark" do
+      it "returns true" do
+        board.player1_insert(2)
+        board.player1_insert(5)
+        board.player1_insert(8)
+        expect(board.game_over?).to be_truthy
+      end
+    end
+
+    context "when first line of first column, second line of second column and third line of third column is filled with same mark" do
+      it "returns true" do
+        board.player1_insert(0)
+        board.player1_insert(4)
+        board.player1_insert(8)
+        expect(board.game_over?).to be_truthy
+      end
+    end
+
+    context "when third column first line, second column second line and first column third line is filled with same line" do
+      it "returns true" do
+        board.player1_insert(2)
+        board.player1_insert(4)
+        board.player1_insert(6)
+        expect(board.game_over?).to be_truthy
+      end
+    end
+
+    context "when any line is not filled" do
+      it "returns false" do
+        board.player1_insert(0)
+        expect(board.game_over?).to be_falsey
+      end
+    end
+
+    context "when board is empty" do
+      it "returns false" do
+        expect(board.game_over?).to be_falsey
+      end
+    end
+  end
+
+  describe "#tie?" do
+    let(:board) { Board.new }
+
+    context "when board is empty" do
+      it "returns false" do
+        expect(board.tie?).to be_falsey
+      end
+    end
+
+    context "when game is over" do
+      it "returns false" do
+        allow(board).to receive(:game_over?) { true }
+        expect(board.tie?).to be_falsey
+      end
+    end
+
+    context "when board is completely filled" do
+      it "returns true" do
+        board.player1_insert(0)
+        board.player2_insert(1)
+        board.player1_insert(2)
+        board.player2_insert(3)
+        board.player1_insert(4)
+        board.player2_insert(5)
+        board.player1_insert(6)
+        board.player2_insert(7)
+        board.player1_insert(8)
+
+        expect(board.tie?).to be_truthy
+      end
+    end
+  end
 end

@@ -1,3 +1,5 @@
 require './lib/exceptions'
 require './lib/board'
+require './lib/human'
+require './lib/computer'
 require './lib/game'

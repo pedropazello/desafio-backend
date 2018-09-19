@@ -1,5 +1,5 @@
 class Computer
-  def play(board)
+  def get_spot(board)
     eval_board(board)
   end
 
@@ -8,16 +8,16 @@ class Computer
     until spot
       if board.board[4] == "4"
         spot = 4
-        board.player2_insert(4)
       else
-        spot = get_best_move(board, Board::PLAYER2_MARK)
+        spot = get_best_move(board, Player::MARK_2)
         if board.board[spot] != "X" && board.board[spot] != "O"
-          board.player2_insert(spot)
+          spot
         else
           spot = nil
         end
       end
     end
+    spot
   end
 
   def get_best_move(board, next_player, depth = 0, best_score = {})
@@ -29,13 +29,13 @@ class Computer
       end
     end
     available_spaces.each do |as|
-      board.board[as.to_i] = Board::PLAYER2_MARK
+      board.board[as.to_i] = Player::MARK_2
       if board.game_over?
         best_move = as.to_i
         board.board[as.to_i] = as
         return best_move
       else
-        board.board[as.to_i] = Board::PLAYER1_MARK
+        board.board[as.to_i] = Player::MARK_1
         if board.game_over?
           best_move = as.to_i
           board.board[as.to_i] = as

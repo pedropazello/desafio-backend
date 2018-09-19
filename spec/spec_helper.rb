@@ -1,5 +1,10 @@
+require 'simplecov'
+SimpleCov.start
+
 require 'exceptions'
 require 'board'
+require 'player'
+require 'computer'
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|

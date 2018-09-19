@@ -1,19 +1,12 @@
 class Board
-  PLAYER1_MARK = "O"
-  PLAYER2_MARK = "X"
-
   attr_reader :board
 
   def initialize
     @board = ["0", "1", "2", "3", "4", "5", "6", "7", "8"]
   end
 
-  def player1_insert(spot)
-    insert(spot, PLAYER1_MARK)
-  end
-
-  def player2_insert(spot)
-    insert(spot, PLAYER2_MARK)
+  def insert(spot, mark)
+    @board[spot] = mark
   end
 
   def draw
@@ -38,24 +31,16 @@ class Board
 
   def tie?
     board.all? do |spot|
-      spot == PLAYER1_MARK || spot == PLAYER2_MARK
+      spot == Player::MARK_1 || spot == Player::MARK_2
     end
   end
 
-  private
+  # def spot_free?(spot)
+  #   @board[spot] != Player::MARK_1 &&
+  #     @board[spot] != Player::MARK_2
+  # end
 
-  def insert(spot, player)
-    raise SpotDoesNotExistsError unless valid_spot?(spot)
-    raise SpotAlreadyUsedError unless spot_free?(spot.to_i)
-    @board[spot.to_i] = player
-  end
-
-  def spot_free?(spot)
-    @board[spot] != PLAYER1_MARK &&
-      @board[spot] != PLAYER2_MARK
-  end
-
-  def valid_spot?(spot)
-    /^[0-8]{1}$/.match(spot.to_s)
-  end
+  # def valid_spot?(spot)
+  #   /^[0-8]{1}$/.match(spot.to_s)
+  # end
 end

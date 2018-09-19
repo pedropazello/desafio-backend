@@ -1,23 +1,19 @@
 class Game
-  attr_reader :board
-
   def initialize
     @board = Board.new
-    @human = Human.new
-    @computer = Computer.new
+    @player1 = Player.new(type: 1, controller: Human.new)
+    @player2 = Player.new(type: 2, controller: Computer.new)
   end
 
   def start_game
-    # start by printing the board
-    puts board.draw
+    puts @board.draw
     puts "Enter [0-8]:"
-    # loop through until the game was won or tied
-    until board.game_over? || board.tie?
-      @human.play(@board)
-      if !board.game_over? && !board.tie?
-        @computer.play(@board)
+    until @board.game_over? || @board.tie?
+      @player1.make_move(@board)
+      if !@board.game_over? && !@board.tie?
+        @player2.make_move(@board)
       end
-      puts board.draw
+      puts @board.draw
     end
     puts "Game over"
   end

@@ -6,6 +6,7 @@ require 'board'
 require 'player'
 require 'computer'
 require 'human'
+require 'configuration'
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|

@@ -2,6 +2,8 @@ class Player
   MARK_1 = "O"
   MARK_2 = "X"
 
+  attr_reader :type, :controller
+
   def initialize(type:, controller:)
     @type = type
     @controller = controller

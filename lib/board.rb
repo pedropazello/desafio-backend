@@ -35,12 +35,8 @@ class Board
     end
   end
 
-  # def spot_free?(spot)
-  #   @board[spot] != Player::MARK_1 &&
-  #     @board[spot] != Player::MARK_2
-  # end
-
-  # def valid_spot?(spot)
-  #   /^[0-8]{1}$/.match(spot.to_s)
-  # end
+  def spot_free?(spot)
+    board[spot.to_i] != Player::MARK_1 &&
+      board[spot.to_i] != Player::MARK_2
+  end
 end

@@ -5,6 +5,7 @@ require 'exceptions'
 require 'board'
 require 'player'
 require 'computer'
+require 'human'
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|

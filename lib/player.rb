@@ -10,11 +10,19 @@ class Player
   end
 
   def make_move(board)
+    puts_round_header
+    puts board.draw if controller.is_a?(Human)
     spot = @controller.get_spot(board)
     board.insert(spot, mark)
+    puts board.draw if controller.is_a?(Computer)
   end
 
   private
+
+  def puts_round_header
+    puts "=============="
+    puts "Player #{type}"
+  end
 
   def mark
     return MARK_1 if @type == 1

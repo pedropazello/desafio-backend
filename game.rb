@@ -1,3 +1,5 @@
+require './lib/prompt/main_menu'
+require './lib/prompt/human_move'
 require './lib/exceptions'
 require './lib/board'
 require './lib/human'

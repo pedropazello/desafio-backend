@@ -6,6 +6,7 @@ require 'board'
 require 'player'
 require 'computer'
 require 'human'
+require 'prompt/main_menu'
 require 'configuration'
 
 RSpec.configure do |config|

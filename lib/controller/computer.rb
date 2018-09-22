@@ -27,6 +27,8 @@ module Controller
       eval_board(board)
     end
 
+    private
+
     def eval_board(board)
       spot = nil
       until spot
@@ -37,15 +39,10 @@ module Controller
     end
 
     def get_best_move(board)
-      board.available_spots.each do |spot|
-        spot = spot.to_i
-        fake_board = Board.new(spots: board.spots.dup)
-        fake_board.insert(spot, Player::MARK_2)
-        return spot if fake_board.game_over?
-
-        fake_board = Board.new(spots: board.spots.dup)
-        fake_board.insert(spot, Player::MARK_1)
-        return spot if fake_board.game_over?
+      board.available_spots.map(&:to_i).each do |spot|
+        if BoardSimulator.anyone_can_win_with_this_spot?(board.spots.dup, spot)
+          return spot
+        end
       end
 
       n = rand(0..board.available_spots.count)

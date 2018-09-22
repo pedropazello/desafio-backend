@@ -14,7 +14,7 @@ module Prompt
       option = gets.chomp
       return option if self.valid_option?(option)
       puts "option #{option} is invalid. Try another."
-      self.get_option(board)
+      self.get_option
     end
 
     def self.valid_option?(option)

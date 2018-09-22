@@ -1,7 +1,6 @@
 require 'simplecov'
 SimpleCov.start
 
-require 'exceptions'
 require 'board'
 require 'player'
 require 'controller/computer'
@@ -9,6 +8,7 @@ require 'controller/human'
 require 'prompt/main_menu'
 require 'prompt/difficulty'
 require 'configuration'
+require 'board_simulator'
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|

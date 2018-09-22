@@ -5,8 +5,7 @@ RSpec.describe Controller::Computer do
     context "when difficulty is hard and computer is player 2" do
       let(:computer) do
         Controller::Computer.new(
-          difficulty: Controller::Computer::HARD,
-          player_type: 2
+          difficulty: Controller::Computer::HARD
         )
       end
 
@@ -49,11 +48,11 @@ RSpec.describe Controller::Computer do
 
         context "and no one player can win on next move" do
           before do
-            allow(computer).to receive(:rand) { 5 }
+            allow(board).to receive(:random_available_spot) { 5 }
           end
 
           it "returns a random spot available" do
-            expect(computer.get_spot(board)).to eq(6)
+            expect(computer.get_spot(board)).to eq(5)
           end
         end
       end

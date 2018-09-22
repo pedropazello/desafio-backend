@@ -164,4 +164,23 @@ RSpec.describe Board do
       end
     end
   end
+
+  describe "#random_available_spot" do
+    context "when only one spot is available" do
+      let(:board) { Board.new }
+
+      it "returns this spot" do
+        board.insert(0, Player::MARK_1)
+        board.insert(1, Player::MARK_2)
+        board.insert(2, Player::MARK_1)
+        board.insert(3, Player::MARK_2)
+        board.insert(4, Player::MARK_1)
+        board.insert(5, Player::MARK_2)
+        board.insert(6, Player::MARK_1)
+        board.insert(7, Player::MARK_2)
+
+        expect(board.random_available_spot).to eq(8)
+      end
+    end
+  end
 end

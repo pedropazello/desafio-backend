@@ -8,11 +8,10 @@ module Controller
     NORMAL_HIT_PERCENT = 60.0
     HARD_HIT_PERCENT   = 100.0
 
-    attr_reader :difficulty, :player_type
+    attr_reader :difficulty
 
-    def initialize(difficulty: HARD, player_type: 2)
+    def initialize(difficulty: HARD)
       @difficulty = difficulty
-      @player_type = player_type
     end
 
     def easy?
@@ -28,39 +27,15 @@ module Controller
     end
 
     def get_spot(board)
-      eval_board(board)
+      best_spot = board.best_available_spot
+      return best_spot if best_spot && do_right_move?
+      board.random_available_spot
     end
 
     private
 
-    def eval_board(board)
-      spot = nil
-      until spot
-        spot = get_move(board)
-      end
-      spot
-    end
-
-    def get_move(board)
-      if do_right_move?
-        return 4 if board.spot_free?(4)
-        board.available_spots.map(&:to_i).each do |spot|
-          if BoardSimulator.anyone_can_win_with_this_spot?(board.spots.dup, spot)
-            return spot
-          end
-        end
-      end
-
-      random_spot(board)
-    end
-
     def do_right_move?
       rand.to_f <= (hit_percent / 100.0)
-    end
-
-    def random_spot(board)
-      n = rand(0..board.available_spots.count)
-      board.available_spots[n].to_i
     end
 
     def hit_percent

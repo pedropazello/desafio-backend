@@ -15,10 +15,18 @@ class Board
     " #{spots[6]} | #{spots[7]} | #{spots[8]} \n"
   end
 
-  def available_spots
-    spots.select do |spot|
-      spot != Player::MARK_2 && spot != Player::MARK_1
+  def best_available_spot
+    return 4 if spot_free?(4)
+    available_spots.map(&:to_i).each do |spot|
+      if BoardSimulator.anyone_can_win_with_this_spot?(spots.dup, spot)
+        return spot
+      end
     end
+    nil
+  end
+
+  def random_available_spot
+    available_spots.sample.to_i
   end
 
   def game_over?
@@ -48,6 +56,10 @@ class Board
   end
 
   private
+
+  def available_spots
+    spots.select { |spot| spot_free?(spot) }
+  end
 
   def starter_spots
     ["0", "1", "2", "3", "4", "5", "6", "7", "8"]

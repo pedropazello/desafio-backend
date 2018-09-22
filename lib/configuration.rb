@@ -17,8 +17,7 @@ class Configuration
       HUMAN_VS_COMPUTER    => Controller::Human.new,
       HUMAN_VS_HUMAN       => Controller::Human.new,
       COMPUTER_VS_COMPUTER => Controller::Computer.new(
-        difficulty: difficulty,
-        player_type: 1
+        difficulty: difficulty
       )
     }[game_mode]
 
@@ -32,8 +31,7 @@ class Configuration
       ),
       HUMAN_VS_HUMAN       => Controller::Human.new,
       COMPUTER_VS_COMPUTER => Controller::Computer.new(
-        difficulty: difficulty,
-        player_type: 2
+        difficulty: difficulty
       )
     }[game_mode]
 

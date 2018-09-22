@@ -1,3 +1,11 @@
+[![Build Status](https://travis-ci.org/pedropazello/desafio-backend.svg?branch=master)](https://travis-ci.org/pedropazello/desafio-backend)
+
+[![Maintainability](https://api.codeclimate.com/v1/badges/ad594491bb9512a5ae28/maintainability)](https://codeclimate.com/github/pedropazello/desafio-backend/maintainability)
+
+[![Test Coverage](https://api.codeclimate.com/v1/badges/ad594491bb9512a5ae28/test_coverage)](https://codeclimate.com/github/pedropazello/desafio-backend/test_coverage)
+
+
+
 # Desafio Backend Qconcursos
 
 Nós do Qconcursos nos orgulhamos do nosso time e queremos sempre boas pessoas que acrescentem. Por isso gostamos de testar nossos candidatos.

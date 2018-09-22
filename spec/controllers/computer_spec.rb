@@ -46,6 +46,16 @@ RSpec.describe Controller::Computer do
             expect(computer.get_spot(board)).to eq(2)
           end
         end
+
+        context "and no one player can win on next move" do
+          before do
+            allow(computer).to receive(:rand) { 5 }
+          end
+
+          it "returns a random spot available" do
+            expect(computer.get_spot(board)).to eq(6)
+          end
+        end
       end
     end
   end

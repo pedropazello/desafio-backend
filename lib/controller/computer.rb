@@ -37,36 +37,19 @@ module Controller
     end
 
     def get_best_move(board)
-      available_spaces = []
-      best_move = nil
-      board.board.each do |s|
-        if s != "X" && s != "O"
-          available_spaces << s
-        end
+      board.available_spots.each do |spot|
+        spot = spot.to_i
+        fake_board = Board.new(spots: board.spots.dup)
+        fake_board.insert(spot, Player::MARK_2)
+        return spot if fake_board.game_over?
+
+        fake_board = Board.new(spots: board.spots.dup)
+        fake_board.insert(spot, Player::MARK_1)
+        return spot if fake_board.game_over?
       end
-      available_spaces.each do |as|
-        board.board[as.to_i] = Player::MARK_2
-        if board.game_over?
-          best_move = as.to_i
-          board.board[as.to_i] = as
-          return best_move
-        else
-          board.board[as.to_i] = Player::MARK_1
-          if board.game_over?
-            best_move = as.to_i
-            board.board[as.to_i] = as
-            return best_move
-          else
-            board.board[as.to_i] = as
-          end
-        end
-      end
-      if best_move
-        return best_move
-      else
-        n = rand(0..available_spaces.count)
-        return available_spaces[n].to_i
-      end
+
+      n = rand(0..board.available_spots.count)
+      return board.available_spots[n].to_i
     end
   end
 end

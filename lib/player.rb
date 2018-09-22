@@ -11,10 +11,10 @@ class Player
 
   def make_move(board)
     puts_round_header
-    puts board.draw if controller.is_a?(Human)
+    puts board.draw if controller.is_a?(Controller::Human)
     spot = @controller.get_spot(board)
     board.insert(spot, mark)
-    puts board.draw if controller.is_a?(Computer)
+    puts board.draw if controller.is_a?(Controller::Computer)
   end
 
   private

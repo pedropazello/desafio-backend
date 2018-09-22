@@ -4,9 +4,10 @@ SimpleCov.start
 require 'exceptions'
 require 'board'
 require 'player'
-require 'computer'
-require 'human'
+require 'controller/computer'
+require 'controller/human'
 require 'prompt/main_menu'
+require 'prompt/difficulty'
 require 'configuration'
 
 RSpec.configure do |config|

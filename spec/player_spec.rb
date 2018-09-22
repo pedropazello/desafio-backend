@@ -4,7 +4,7 @@ RSpec.describe Player do
   describe "#make_move" do
     context "when is a player 1" do
       let(:board) { Board.new }
-      let(:computer) { Computer.new }
+      let(:computer) { Controller::Computer.new }
       let(:player) { Player.new(type: 1, controller: computer) }
 
       it "insert O on specific spot of the board" do
@@ -22,7 +22,7 @@ RSpec.describe Player do
 
     context "when is a player 2" do
       let(:board) { Board.new }
-      let(:computer) { Computer.new }
+      let(:computer) { Controller::Computer.new }
       let(:player) { Player.new(type: 2, controller: computer) }
 
       it "insert X on specific sot of the board" do

@@ -11,16 +11,17 @@ class Player
 
   def make_move(board)
     puts_round_header
-    puts board.draw if controller.is_a?(Controller::Human)
     spot = @controller.get_spot(board)
     board.insert(spot, mark)
-    puts board.draw if controller.is_a?(Controller::Computer)
+    puts board.draw
   end
 
   private
 
   def puts_round_header
+    puts "\n"
     puts "=============="
+    puts "\n"
     puts "Player #{type}"
   end
 

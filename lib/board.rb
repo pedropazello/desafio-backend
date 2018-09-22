@@ -30,14 +30,15 @@ class Board
   end
 
   def game_over?
-    [spots[0], spots[1], spots[2]].uniq.length == 1 ||
-    [spots[3], spots[4], spots[5]].uniq.length == 1 ||
-    [spots[6], spots[7], spots[8]].uniq.length == 1 ||
-    [spots[0], spots[3], spots[6]].uniq.length == 1 ||
-    [spots[1], spots[4], spots[7]].uniq.length == 1 ||
-    [spots[2], spots[5], spots[8]].uniq.length == 1 ||
-    [spots[0], spots[4], spots[8]].uniq.length == 1 ||
-    [spots[2], spots[4], spots[6]].uniq.length == 1
+    player1_wins? || player2_wins?
+  end
+
+  def player1_wins?
+    player_wins?(Player::MARK_1)
+  end
+
+  def player2_wins?
+    player_wins?(Player::MARK_2)
   end
 
   def tie?
@@ -57,11 +58,30 @@ class Board
 
   private
 
+  def player_wins?(player)
+    lines.select do |line|
+      line.uniq.count == 1 && line.uniq[0] == player
+    end.count > 0
+  end
+
   def available_spots
     spots.select { |spot| spot_free?(spot) }
   end
 
   def starter_spots
     ["0", "1", "2", "3", "4", "5", "6", "7", "8"]
+  end
+
+  def lines
+    [
+      [spots[0], spots[1], spots[2]],
+      [spots[3], spots[4], spots[5]],
+      [spots[6], spots[7], spots[8]],
+      [spots[0], spots[3], spots[6]],
+      [spots[1], spots[4], spots[7]],
+      [spots[2], spots[5], spots[8]],
+      [spots[0], spots[4], spots[8]],
+      [spots[2], spots[4], spots[6]]
+    ]
   end
 end

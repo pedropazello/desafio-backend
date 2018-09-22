@@ -183,4 +183,204 @@ RSpec.describe Board do
       end
     end
   end
+
+  describe "#player1_wins?" do
+    let(:board) { Board.new }
+
+    context "when player 1 wins on first line" do
+      before do
+        board.insert(0, Player::MARK_1)
+        board.insert(1, Player::MARK_1)
+        board.insert(2, Player::MARK_1)
+      end
+
+      it "returns true" do
+        expect(board.player1_wins?).to be_truthy
+      end
+    end
+
+    context "when player 1 wins on second line" do
+      before do
+        board.insert(3, Player::MARK_1)
+        board.insert(4, Player::MARK_1)
+        board.insert(5, Player::MARK_1)
+      end
+
+      it "returns true" do
+        expect(board.player1_wins?).to be_truthy
+      end
+    end
+
+    context "when player 1 wins on third line" do
+      before do
+        board.insert(6, Player::MARK_1)
+        board.insert(7, Player::MARK_1)
+        board.insert(8, Player::MARK_1)
+      end
+
+      it "returns true" do
+        expect(board.player1_wins?).to be_truthy
+      end
+    end
+
+    context "when player 1 wins on first column" do
+      before do
+        board.insert(0, Player::MARK_1)
+        board.insert(3, Player::MARK_1)
+        board.insert(6, Player::MARK_1)
+      end
+
+      it "returns true" do
+        expect(board.player1_wins?).to be_truthy
+      end
+    end
+
+    context "when player 1 wins on second column" do
+      before do
+        board.insert(1, Player::MARK_1)
+        board.insert(4, Player::MARK_1)
+        board.insert(7, Player::MARK_1)
+      end
+
+      it "returns true" do
+        expect(board.player1_wins?).to be_truthy
+      end
+    end
+
+    context "when player 1 wins on third column" do
+      before do
+        board.insert(2, Player::MARK_1)
+        board.insert(5, Player::MARK_1)
+        board.insert(8, Player::MARK_1)
+      end
+
+      it "returns true" do
+        expect(board.player1_wins?).to be_truthy
+      end
+    end
+
+    context "when player 1 wins on first line first column, second line second column and third line third column" do
+      before do
+        board.insert(0, Player::MARK_1)
+        board.insert(4, Player::MARK_1)
+        board.insert(8, Player::MARK_1)
+      end
+
+      it "returns true" do
+        expect(board.player1_wins?).to be_truthy
+      end
+    end
+
+    context "when player 1 wins on first line third column, second line second column and third line first column" do
+      before do
+        board.insert(2, Player::MARK_1)
+        board.insert(4, Player::MARK_1)
+        board.insert(6, Player::MARK_1)
+      end
+
+      it "returns true" do
+        expect(board.player1_wins?).to be_truthy
+      end
+    end
+  end
+
+  describe "#player2_wins?" do
+    let(:board) { Board.new }
+
+    context "when player 2 wins on first line" do
+      before do
+        board.insert(0, Player::MARK_2)
+        board.insert(1, Player::MARK_2)
+        board.insert(2, Player::MARK_2)
+      end
+
+      it "returns true" do
+        expect(board.player2_wins?).to be_truthy
+      end
+    end
+
+    context "when player 2 wins on second line" do
+      before do
+        board.insert(3, Player::MARK_2)
+        board.insert(4, Player::MARK_2)
+        board.insert(5, Player::MARK_2)
+      end
+
+      it "returns true" do
+        expect(board.player2_wins?).to be_truthy
+      end
+    end
+
+    context "when player 2 wins on third line" do
+      before do
+        board.insert(6, Player::MARK_2)
+        board.insert(7, Player::MARK_2)
+        board.insert(8, Player::MARK_2)
+      end
+
+      it "returns true" do
+        expect(board.player2_wins?).to be_truthy
+      end
+    end
+
+    context "when player 2 wins on first column" do
+      before do
+        board.insert(0, Player::MARK_2)
+        board.insert(3, Player::MARK_2)
+        board.insert(6, Player::MARK_2)
+      end
+
+      it "returns true" do
+        expect(board.player2_wins?).to be_truthy
+      end
+    end
+
+    context "when player 2 wins on second column" do
+      before do
+        board.insert(1, Player::MARK_2)
+        board.insert(4, Player::MARK_2)
+        board.insert(7, Player::MARK_2)
+      end
+
+      it "returns true" do
+        expect(board.player2_wins?).to be_truthy
+      end
+    end
+
+    context "when player 2 wins on third column" do
+      before do
+        board.insert(2, Player::MARK_2)
+        board.insert(5, Player::MARK_2)
+        board.insert(8, Player::MARK_2)
+      end
+
+      it "returns true" do
+        expect(board.player2_wins?).to be_truthy
+      end
+    end
+
+    context "when player 2 wins on first line first column, second line second column and third line third column" do
+      before do
+        board.insert(0, Player::MARK_2)
+        board.insert(4, Player::MARK_2)
+        board.insert(8, Player::MARK_2)
+      end
+
+      it "returns true" do
+        expect(board.player2_wins?).to be_truthy
+      end
+    end
+
+    context "when player 2 wins on first line third column, second line second column and third line first column" do
+      before do
+        board.insert(2, Player::MARK_2)
+        board.insert(4, Player::MARK_2)
+        board.insert(6, Player::MARK_2)
+      end
+
+      it "returns true" do
+        expect(board.player2_wins?).to be_truthy
+      end
+    end
+  end
 end

@@ -24,7 +24,7 @@ class Game
   end
 
   def show_end_status
-    show_winner if board.game_over?
+    return show_winner if board.game_over?
     show_tie_message if board.tie?
   end
 
